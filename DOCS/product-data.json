@@ -1,0 +1,253 @@
+{
+  "products": [
+    {
+      "title": "Tam's Jams - Blueberry",
+      "handle": "tams-jams-blueberry",
+      "description": "Experience the sweet taste of authentic homemade blueberry jam. Made from real blueberries with no additives or artificial ingredients.",
+      "longDescription": "Tam's Jams is a celebration of family, heritage, and the sweetness of second chances. Born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. She traded fabric and thread for fruit and flavor, creating this beloved jam recipe that her grandson, now a filmmaker, encouraged her to share with the world.",
+      "flavor": "Blueberry",
+      "netWeight": {
+        "oz": 12,
+        "g": 340
+      },
+      "ingredients": ["Blueberries", "Cane Sugar", "Lemon Juice", "Water"],
+      "attributes": [
+        "Real Fruit",
+        "Non-GMO",
+        "Homemade",
+        "No Additives"
+      ],
+      "nutrition": {
+        "servings": 20,
+        "servingSize": "1 tbsp (18g)",
+        "calories": 35,
+        "totalFat": "0g",
+        "saturatedFat": "0g",
+        "transFat": "0g",
+        "cholesterol": "0mg",
+        "sodium": "0mg",
+        "totalCarbs": "9g",
+        "fiber": "0g",
+        "totalSugars": "8g",
+        "addedSugars": "8g",
+        "protein": "0g"
+      },
+      "storage": "Refrigerate after opening",
+      "sku": "TAMS-BLUEBERRY-12OZ"
+    },
+    {
+      "title": "Tam's Jams - Strawberry",
+      "handle": "tams-jams-strawberry",
+      "description": "Delicious homemade strawberry jam made with real strawberries, no additives or artificial ingredients.",
+      "longDescription": "Tam's Jams is a celebration of family, heritage, and the sweetness of second chances. Born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. She traded fabric and thread for fruit and flavor, creating this beloved jam recipe that her grandson, now a filmmaker, encouraged her to share with the world.",
+      "flavor": "Strawberry",
+      "netWeight": {
+        "oz": 12,
+        "g": 340
+      },
+      "ingredients": ["Strawberries", "Cane Sugar", "Lemon Juice", "Water"],
+      "attributes": [
+        "Real Fruit",
+        "Non-GMO",
+        "Homemade",
+        "No Additives"
+      ],
+      "nutrition": {
+        "servings": 20,
+        "servingSize": "1 tbsp (18g)",
+        "calories": 35,
+        "totalFat": "0g",
+        "saturatedFat": "0g",
+        "transFat": "0g",
+        "cholesterol": "0mg",
+        "sodium": "0mg",
+        "totalCarbs": "9g",
+        "fiber": "0g",
+        "totalSugars": "8g",
+        "addedSugars": "8g",
+        "protein": "0g"
+      },
+      "storage": "Refrigerate after opening",
+      "sku": "TAMS-STRAWBERRY-12OZ"
+    },
+    {
+      "title": "Tam's Jams - Raspberry",
+      "handle": "tams-jams-raspberry",
+      "description": "Premium homemade raspberry jam crafted with real raspberries, cane sugar, and natural ingredients only.",
+      "longDescription": "Tam's Jams is a celebration of family, heritage, and the sweetness of second chances. Born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. She traded fabric and thread for fruit and flavor, creating this beloved jam recipe that her grandson, now a filmmaker, encouraged her to share with the world.",
+      "flavor": "Raspberry",
+      "netWeight": {
+        "oz": 12,
+        "g": 340
+      },
+      "ingredients": ["Raspberries", "Cane Sugar", "Lemon Juice", "Water"],
+      "attributes": [
+        "Real Fruit",
+        "Non-GMO",
+        "Homemade",
+        "No Additives"
+      ],
+      "nutrition": {
+        "servings": 20,
+        "servingSize": "1 tbsp (18g)",
+        "calories": 35,
+        "totalFat": "0g",
+        "saturatedFat": "0g",
+        "transFat": "0g",
+        "cholesterol": "0mg",
+        "sodium": "0mg",
+        "totalCarbs": "9g",
+        "fiber": "0g",
+        "totalSugars": "8g",
+        "addedSugars": "8g",
+        "protein": "0g"
+      },
+      "storage": "Refrigerate after opening",
+      "sku": "TAMS-RASPBERRY-12OZ"
+    },
+    {
+      "title": "Tam's Jams - Apricot",
+      "handle": "tams-jams-apricot",
+      "description": "Smooth and delicious apricot jam made with real apricots, no additives or artificial ingredients.",
+      "longDescription": "Tam's Jams is a celebration of family, heritage, and the sweetness of second chances. Born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. She traded fabric and thread for fruit and flavor, creating this beloved jam recipe that her grandson, now a filmmaker, encouraged her to share with the world.",
+      "flavor": "Apricot",
+      "netWeight": {
+        "oz": 12,
+        "g": 340
+      },
+      "ingredients": ["Apricots", "Cane Sugar", "Lemon Juice", "Water"],
+      "attributes": [
+        "Real Fruit",
+        "Non-GMO",
+        "Homemade",
+        "No Additives"
+      ],
+      "nutrition": {
+        "servings": 20,
+        "servingSize": "1 tbsp (18g)",
+        "calories": 35,
+        "totalFat": "0g",
+        "saturatedFat": "0g",
+        "transFat": "0g",
+        "cholesterol": "0mg",
+        "sodium": "0mg",
+        "totalCarbs": "9g",
+        "fiber": "0g",
+        "totalSugars": "8g",
+        "addedSugars": "8g",
+        "protein": "0g"
+      },
+      "storage": "Refrigerate after opening",
+      "sku": "TAMS-APRICOT-12OZ"
+    },
+    {
+      "title": "Tam's Jams - Apple",
+      "handle": "tams-jams-apple",
+      "description": "Classic homemade apple jam with real apples and natural ingredients, no additives.",
+      "longDescription": "Tam's Jams is a celebration of family, heritage, and the sweetness of second chances. Born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. She traded fabric and thread for fruit and flavor, creating this beloved jam recipe that her grandson, now a filmmaker, encouraged her to share with the world.",
+      "flavor": "Apple",
+      "netWeight": {
+        "oz": 12,
+        "g": 340
+      },
+      "ingredients": ["Apple", "Cane Sugar", "Lemon Juice", "Water"],
+      "attributes": [
+        "Real Fruit",
+        "Non-GMO",
+        "Homemade",
+        "No Additives"
+      ],
+      "nutrition": {
+        "servings": 20,
+        "servingSize": "1 tbsp (18g)",
+        "calories": 35,
+        "totalFat": "0g",
+        "saturatedFat": "0g",
+        "transFat": "0g",
+        "cholesterol": "0mg",
+        "sodium": "0mg",
+        "totalCarbs": "9g",
+        "fiber": "0g",
+        "totalSugars": "8g",
+        "addedSugars": "8g",
+        "protein": "0g"
+      },
+      "storage": "Refrigerate after opening",
+      "sku": "TAMS-APPLE-12OZ"
+    },
+    {
+      "title": "Tam's Jams - Sour Cherry",
+      "handle": "tams-jams-sour-cherry",
+      "description": "Tart and delicious sour cherry jam made with real sour cherries, no additives or artificial ingredients.",
+      "longDescription": "Tam's Jams is a celebration of family, heritage, and the sweetness of second chances. Born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. She traded fabric and thread for fruit and flavor, creating this beloved jam recipe that her grandson, now a filmmaker, encouraged her to share with the world.",
+      "flavor": "Sour Cherry",
+      "netWeight": {
+        "oz": 12,
+        "g": 340
+      },
+      "ingredients": ["Sour Cherry", "Cane Sugar", "Lemon Juice", "Water"],
+      "attributes": [
+        "Real Fruit",
+        "Non-GMO",
+        "Homemade",
+        "No Additives"
+      ],
+      "nutrition": {
+        "servings": 20,
+        "servingSize": "1 tbsp (18g)",
+        "calories": 35,
+        "totalFat": "0g",
+        "saturatedFat": "0g",
+        "transFat": "0g",
+        "cholesterol": "0mg",
+        "sodium": "0mg",
+        "totalCarbs": "9g",
+        "fiber": "0g",
+        "totalSugars": "8g",
+        "addedSugars": "8g",
+        "protein": "0g"
+      },
+      "storage": "Refrigerate after opening",
+      "sku": "TAMS-SOUR-CHERRY-12OZ"
+    },
+    {
+      "title": "Tam's Jams - Quince",
+      "handle": "tams-jams-quince",
+      "description": "Unique and aromatic quince jam made with real quinces, cinnamon, and natural ingredients only.",
+      "longDescription": "Tam's Jams is a celebration of family, heritage, and the sweetness of second chances. Born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. She traded fabric and thread for fruit and flavor, creating this beloved jam recipe that her grandson, now a filmmaker, encouraged her to share with the world.",
+      "flavor": "Quince",
+      "netWeight": {
+        "oz": 12,
+        "g": 340
+      },
+      "ingredients": ["Quince", "Cane Sugar", "Lemon Juice", "Cinnamon", "Water"],
+      "attributes": [
+        "Real Fruit",
+        "Non-GMO",
+        "Homemade",
+        "No Additives"
+      ],
+      "nutrition": {
+        "servings": 20,
+        "servingSize": "1 tbsp (18g)",
+        "calories": 35,
+        "totalFat": "0g",
+        "saturatedFat": "0g",
+        "transFat": "0g",
+        "cholesterol": "0mg",
+        "sodium": "0mg",
+        "totalCarbs": "9g",
+        "fiber": "0g",
+        "totalSugars": "8g",
+        "addedSugars": "8g",
+        "protein": "0g"
+      },
+      "storage": "Refrigerate after opening",
+      "sku": "TAMS-QUINCE-12OZ"
+    }
+  ],
+  "brand": {
+    "name": "Tam's Jams",
+    "story": "Tam's Jams was born from the heart of Tamara, an Armenian immigrant who came to America dreaming of becoming a Hollywood fashion designer. Life had other plans — raising a large family came first — but her creativity never faded. She simply traded fabric and thread for fruit and flavor. Years later, her grandson, now a filmmaker, brought her to the red carpet of his blockbuster premiere — letting her live a piece of her dream. Inspired by her passion, he encouraged her to share her other love with the world. Tam's Jams is a celebration of family, heritage, and the sweetness of second chances."
+  }
+}
