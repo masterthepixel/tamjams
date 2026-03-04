@@ -44,9 +44,17 @@ Welcome to the TamsJam e-commerce platform documentation. This folder contains c
    - Code patterns to follow
    - Performance optimization tips
 
+5. **[BACKEND_SCRIPTS_GUIDE.md](./BACKEND_SCRIPTS_GUIDE.md)** — Backend script documentation
+   - All 6 verified working scripts documented
+   - Complete workflow examples
+   - Data sources and file formats
+   - Troubleshooting common issues
+   - Script development patterns
+   - When to create new scripts
+
 ### Session & Project History
 
-5. **[SESSION_TRANSCRIPT_2026_03_04.md](./SESSION_TRANSCRIPT_2026_03_04.md)** — Complete session record
+6. **[SESSION_TRANSCRIPT_2026_03_04.md](./SESSION_TRANSCRIPT_2026_03_04.md)** — Complete session record
    - What was accomplished
    - Workflow and patterns learned
    - Technical decisions made
@@ -55,7 +63,7 @@ Welcome to the TamsJam e-commerce platform documentation. This folder contains c
    - Files modified/created
    - Lessons for future development
 
-6. **[PRODUCT_IMPORT.md](./PRODUCT_IMPORT.md)** — Product import documentation
+7. **[PRODUCT_IMPORT.md](./PRODUCT_IMPORT.md)** — Product import documentation
    - Details about the 7 jam products
    - Product data structure
    - Import workflow steps
