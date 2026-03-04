@@ -1,9 +1,7 @@
 "use client"
 
 import React, { useEffect, useActionState } from "react";
-
 import Input from "@modules/common/components/input"
-
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"
 import { updateCustomer } from "@lib/data/customer"
@@ -46,7 +44,7 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
   }, [state])
 
   return (
-    <form action={formAction} className="w-full overflow-visible">
+    <form action={formAction} className="w-full">
       <AccountInfo
         label="Name"
         currentInfo={`${customer.first_name} ${customer.last_name}`}
@@ -55,16 +53,16 @@ const ProfileName: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
         data-testid="account-name-editor"
       >
-        <div className="grid grid-cols-2 gap-x-4">
+        <div className="grid grid-cols-2 gap-4">
           <Input
-            label="First name"
+            label="First Name"
             name="first_name"
             required
             defaultValue={customer.first_name ?? ""}
             data-testid="first-name-input"
           />
           <Input
-            label="Last name"
+            label="Last Name"
             name="last_name"
             required
             defaultValue={customer.last_name ?? ""}

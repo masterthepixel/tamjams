@@ -1,12 +1,9 @@
 "use client"
 
 import React, { useEffect, useActionState } from "react";
-
 import Input from "@modules/common/components/input"
-
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"
-// import { updateCustomer } from "@lib/data/customer"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
@@ -15,25 +12,16 @@ type MyInformationProps = {
 const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   const [successState, setSuccessState] = React.useState(false)
 
-  // TODO: It seems we don't support updating emails now?
   const updateCustomerEmail = (
-    _currentState: Record<string, unknown>,
-    formData: FormData
+    _currentState: { success: boolean; error: string | null },
+    _formData: FormData
   ) => {
-    const customer = {
-      email: formData.get("email") as string,
-    }
-
-    try {
-      // await updateCustomer(customer)
-      return { success: true, error: null }
-    } catch (error: any) {
-      return { success: false, error: error.toString() }
-    }
+    // Current Medusa v2 starter logic placeholder
+    return { success: true, error: null }
   }
 
   const [state, formAction] = useActionState(updateCustomerEmail, {
-    error: false,
+    error: null,
     success: false,
   })
 
@@ -42,21 +30,23 @@ const ProfileEmail: React.FC<MyInformationProps> = ({ customer }) => {
   }
 
   useEffect(() => {
-    setSuccessState(state.success)
-  }, [state])
+    if (state.success) {
+      setSuccessState(true)
+    }
+  }, [state.success])
 
   return (
     <form action={formAction} className="w-full">
       <AccountInfo
-        label="Email"
+        label="Email Address"
         currentInfo={`${customer.email}`}
         isSuccess={successState}
         isError={!!state.error}
-        errorMessage={state.error}
+        errorMessage={state.error ?? "An error occurred"}
         clearState={clearState}
         data-testid="account-email-editor"
       >
-        <div className="grid grid-cols-1 gap-y-2">
+        <div className="grid grid-cols-1">
           <Input
             label="Email"
             name="email"

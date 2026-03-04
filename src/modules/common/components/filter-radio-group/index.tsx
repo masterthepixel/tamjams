@@ -1,5 +1,4 @@
-import { EllipseMiniSolid } from "@medusajs/icons"
-import { Label, RadioGroup, Text, clx } from "@medusajs/ui"
+import { clsx } from "clsx"
 
 type FilterRadioGroupProps = {
   title: string
@@ -20,39 +19,40 @@ const FilterRadioGroup = ({
   "data-testid": dataTestId,
 }: FilterRadioGroupProps) => {
   return (
-    <div className="flex gap-x-3 flex-col gap-y-3">
-      <Text className="txt-compact-small-plus text-ui-fg-muted">{title}</Text>
-      <RadioGroup data-testid={dataTestId} onValueChange={handleChange}>
+    <div className="flex flex-col gap-y-4">
+      <span className="text-sm font-semibold text-olive-950 dark:text-white uppercase tracking-wider">
+        {title}
+      </span>
+      <div className="flex flex-col gap-y-2" data-testid={dataTestId}>
         {items?.map((i) => (
-          <div
+          <button
             key={i.value}
-            className={clx("flex gap-x-2 items-center", {
-              "ml-[-23px]": i.value === value,
-            })}
+            onClick={() => handleChange(i.value)}
+            className={clsx(
+              "flex items-center gap-x-2 text-sm transition-colors duration-200 text-left",
+              i.value === value
+                ? "text-olive-950 dark:text-white font-medium"
+                : "text-olive-600 dark:text-olive-400 hover:text-olive-800 dark:hover:text-olive-200"
+            )}
+            data-testid="radio-label"
+            data-active={i.value === value}
           >
-            {i.value === value && <EllipseMiniSolid />}
-            <RadioGroup.Item
-              checked={i.value === value}
-              className="hidden peer"
-              id={i.value}
-              value={i.value}
-            />
-            <Label
-              htmlFor={i.value}
-              className={clx(
-                "!txt-compact-small !transform-none text-ui-fg-subtle hover:cursor-pointer",
-                {
-                  "text-ui-fg-base": i.value === value,
-                }
+            <div
+              className={clsx(
+                "size-4 rounded-full border flex items-center justify-center transition-all duration-200",
+                i.value === value
+                  ? "border-olive-950 dark:border-white bg-olive-950 dark:bg-white"
+                  : "border-olive-300 dark:border-olive-700"
               )}
-              data-testid="radio-label"
-              data-active={i.value === value}
             >
-              {i.label}
-            </Label>
-          </div>
+              {i.value === value && (
+                <div className="size-1.5 rounded-full bg-white dark:bg-olive-950" />
+              )}
+            </div>
+            {i.label}
+          </button>
         ))}
-      </RadioGroup>
+      </div>
     </div>
   )
 }

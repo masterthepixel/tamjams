@@ -4,7 +4,6 @@ import React, { useEffect, useActionState } from "react"
 import Input from "@modules/common/components/input"
 import AccountInfo from "../account-info"
 import { HttpTypes } from "@medusajs/types"
-import { toast } from "@medusajs/ui"
 
 type MyInformationProps = {
   customer: HttpTypes.StoreCustomer
@@ -13,9 +12,9 @@ type MyInformationProps = {
 const ProfilePassword: React.FC<MyInformationProps> = ({ customer }) => {
   const [successState, setSuccessState] = React.useState(false)
 
-  // TODO: Add support for password updates
   const updatePassword = async () => {
-    toast.info("Password update is not implemented")
+    // Current starter doesn't have a direct password update action exposed in customer data
+    console.info("Password update is not currently implemented in the data layer")
   }
 
   const clearState = () => {
@@ -31,7 +30,7 @@ const ProfilePassword: React.FC<MyInformationProps> = ({ customer }) => {
       <AccountInfo
         label="Password"
         currentInfo={
-          <span>The password is not shown for security reasons</span>
+          <span className="text-olive-400 italic font-normal">••••••••••••</span>
         }
         isSuccess={successState}
         isError={false}
@@ -39,28 +38,32 @@ const ProfilePassword: React.FC<MyInformationProps> = ({ customer }) => {
         clearState={clearState}
         data-testid="account-password-editor"
       >
-        <div className="grid grid-cols-2 gap-4">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
           <Input
-            label="Old password"
+            label="Old Password"
             name="old_password"
             required
             type="password"
             data-testid="old-password-input"
           />
-          <Input
-            label="New password"
-            type="password"
-            name="new_password"
-            required
-            data-testid="new-password-input"
-          />
-          <Input
-            label="Confirm password"
-            type="password"
-            name="confirm_password"
-            required
-            data-testid="confirm-password-input"
-          />
+          <div className="md:col-start-1">
+            <Input
+              label="New Password"
+              type="password"
+              name="new_password"
+              required
+              data-testid="new-password-input"
+            />
+          </div>
+          <div>
+            <Input
+              label="Confirm Password"
+              type="password"
+              name="confirm_password"
+              required
+              data-testid="confirm-password-input"
+            />
+          </div>
         </div>
       </AccountInfo>
     </form>

@@ -3,7 +3,7 @@
 import { isManual, isStripeLike } from "@lib/constants"
 import { placeOrder } from "@lib/data/cart"
 import { HttpTypes } from "@medusajs/types"
-import { Button } from "@medusajs/ui"
+import Button from "@modules/common/components/button"
 import { useElements, useStripe } from "@stripe/react-stripe-js"
 import React, { useState } from "react"
 import ErrorMessage from "../error-message"
@@ -40,7 +40,7 @@ const PaymentButton: React.FC<PaymentButtonProps> = ({
         <ManualTestPaymentButton notReady={notReady} data-testid={dataTestId} />
       )
     default:
-      return <Button disabled>Select a payment method</Button>
+      return <Button disabled className="w-full">Select a payment method</Button>
   }
 }
 
@@ -137,8 +137,8 @@ const StripePaymentButton = ({
       <Button
         disabled={disabled || notReady}
         onClick={handlePayment}
-        size="large"
         isLoading={submitting}
+        className="w-full h-12 text-base"
         data-testid={dataTestId}
       >
         Place order
@@ -177,7 +177,7 @@ const ManualTestPaymentButton = ({ notReady }: { notReady: boolean }) => {
         disabled={notReady}
         isLoading={submitting}
         onClick={handlePayment}
-        size="large"
+        className="w-full h-12 text-base"
         data-testid="submit-order-button"
       >
         Place order

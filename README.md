@@ -29,72 +29,105 @@ Combine Medusa's modules for your commerce backend with the newest Next.js 15 fe
 
 ### Prerequisites
 
-To use the [Next.js Starter Template](https://medusajs.com/nextjs-commerce/), you should have a Medusa server running locally on port 9000.
-For a quick setup, run:
-
-```shell
-npx create-medusa-app@latest
-```
-
-Check out [create-medusa-app docs](https://docs.medusajs.com/learn/installation) for more details and troubleshooting.
+This project requires:
+- **Node.js** 18+
+- **PostgreSQL** 14+ (running locally or via Docker)
+- **pnpm** package manager
 
 # Overview
 
 The Medusa Next.js Starter is built with:
 
-- [Next.js](https://nextjs.org/)
-- [Tailwind CSS](https://tailwindcss.com/)
-- [Typescript](https://www.typescriptlang.org/)
-- [Medusa](https://medusajs.com/)
+- [Next.js](https://nextjs.org/) 15 with App Router
+- [Tailwind CSS](https://tailwindcss.com/) v3
+- [TypeScript](https://www.typescriptlang.org/)
+- [Medusa](https://medusajs.com/) V2 (headless commerce backend)
+- [Stripe](https://stripe.com/) payment integration
 
 Features include:
 
 - Full ecommerce support:
-  - Product Detail Page
-  - Product Overview Page
-  - Product Collections
-  - Cart
-  - Checkout with Stripe
-  - User Accounts
-  - Order Details
-- Full Next.js 15 support:
-  - App Router
-  - Next fetching/caching
-  - Server Components
-  - Server Actions
-  - Streaming
-  - Static Pre-Rendering
+  - Product Detail Page & Product Overview Page
+  - Product Collections & Categories
+  - Shopping Cart & Multi-step Checkout
+  - User Accounts & Order History
+  - Stripe Payment Processing
+- Next.js 15 advanced features:
+  - Server Components by default
+  - Server Actions for mutations
+  - Streaming with Suspense
+  - Static Pre-Rendering with ISR
+  - Multi-region routing support
 
-# Quickstart
+# Getting Started Locally
 
-### Setting up the environment variables
+## 1. Install Dependencies
 
-Navigate into your projects directory and get your environment variables ready:
-
-```shell
-cd nextjs-starter-medusa/
-mv .env.template .env.local
+```bash
+pnpm install
 ```
 
-### Install dependencies
+## 2. Set Up Database
 
-Use Yarn to install all dependencies.
+Ensure PostgreSQL is running. If using Docker:
 
-```shell
-yarn
+```bash
+docker-compose up -d
 ```
 
-### Start developing
+This starts PostgreSQL on port 5432 with credentials:
+- Database: `medusa_db`
+- User: `medusa`
+- Password: `medusa`
 
-You are now ready to start up your project.
+## 3. Configure Environment Variables
 
-```shell
-yarn dev
+**Frontend** — Create `.env.local` in the root directory:
+
+```bash
+MEDUSA_BACKEND_URL=http://localhost:9000
+NEXT_PUBLIC_MEDUSA_PUBLISHABLE_KEY=your_publishable_key_here
+NEXT_PUBLIC_BASE_URL=http://localhost:8000
+NEXT_PUBLIC_DEFAULT_REGION=us
+REVALIDATE_SECRET=supersecret
 ```
 
-### Open the code and start customizing
+**Backend** — Already configured in `backend/.env` (check file for details)
 
-Your site is now running at http://localhost:8000!
+## 4. Start the Services
+
+Open two terminal windows:
+
+**Terminal 1 — Backend (port 9000):**
+
+```bash
+cd backend
+pnpm dev
+```
+
+**Terminal 2 — Frontend (port 8000):**
+
+```bash
+pnpm dev
+```
+
+### Access the Storefront
+
+Your site is now running at **http://localhost:8000**
+
+The Medusa backend API is available at **http://localhost:9000**
+
+## Customer Accounts
+
+**To create a customer account:**
+1. Navigate to http://localhost:8000
+2. Click "Account" → "Sign Up"
+3. Enter your email and password
+4. You can now browse products, add to cart, and checkout
+
+**Admin Credentials** (for managing products/orders via Medusa Admin):
+- Email: `admin@example.com`
+- Password: `adminpass123`
 
 # Payment integrations
 
