@@ -137,8 +137,31 @@ export default function ProductActions({
   return (
     <>
       <div className="flex flex-col gap-y-8" ref={actionsRef}>
-        <div>
-          <ProductPrice product={product} variant={selectedVariant} />
+        {/* Price & Add to Cart Button: Horizontal flex row */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:gap-x-6 gap-y-4 lg:gap-y-0">
+          <div className="lg:w-32">
+            <ProductPrice product={product} variant={selectedVariant} />
+          </div>
+          <Button
+            onClick={handleAddToCart}
+            disabled={
+              !inStock ||
+              !selectedVariant ||
+              !!disabled ||
+              isAdding ||
+              !isValidVariant
+            }
+            variant="primary"
+            className="w-full h-12 text-base uppercase tracking-widest font-bold flex-1"
+            isLoading={isAdding}
+            data-testid="add-product-button"
+          >
+            {!selectedVariant && !options
+              ? "Select variant"
+              : !inStock || !isValidVariant
+                ? "Out of stock"
+                : "Add to cart"}
+          </Button>
         </div>
 
         <div>
@@ -161,39 +184,19 @@ export default function ProductActions({
             </div>
           )}
         </div>
-
-        <Button
-          onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
-          variant="primary"
-          className="w-full h-14 text-base uppercase tracking-widest font-bold"
-          isLoading={isAdding}
-          data-testid="add-product-button"
-        >
-          {!selectedVariant && !options
-            ? "Select variant"
-            : !inStock || !isValidVariant
-              ? "Out of stock"
-              : "Add to cart"}
-        </Button>
-        <MobileActions
-          product={product}
-          variant={selectedVariant}
-          options={options}
-          updateOptions={setOptionValue}
-          inStock={inStock}
-          handleAddToCart={handleAddToCart}
-          isAdding={isAdding}
-          show={!inView}
-          optionsDisabled={!!disabled || isAdding}
-        />
       </div>
+
+      <MobileActions
+        product={product}
+        variant={selectedVariant}
+        options={options}
+        updateOptions={setOptionValue}
+        inStock={inStock}
+        handleAddToCart={handleAddToCart}
+        isAdding={isAdding}
+        show={!inView}
+        optionsDisabled={!!disabled || isAdding}
+      />
     </>
   )
 }

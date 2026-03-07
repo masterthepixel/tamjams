@@ -72,19 +72,21 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
             <ProductInfo product={product} />
 
+            {/* Price & Add to Cart: Side by side on desktop, stacked on mobile */}
+            <Suspense
+              fallback={
+                <ProductActions
+                  disabled={true}
+                  product={product}
+                  region={region}
+                />
+              }
+            >
+              <ProductActionsWrapper id={product.id} region={region} />
+            </Suspense>
+
             <div className="flex flex-col gap-y-8">
               <ProductOnboardingCta />
-              <Suspense
-                fallback={
-                  <ProductActions
-                    disabled={true}
-                    product={product}
-                    region={region}
-                  />
-                }
-              >
-                <ProductActionsWrapper id={product.id} region={region} />
-              </Suspense>
 
               <div className="border-t border-olive-200 dark:border-olive-800 pt-8 w-full">
                 <ProductTabs product={product} />
