@@ -4,7 +4,6 @@ import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
 import { isEqual } from "lodash"
 import { useParams, usePathname, useSearchParams } from "next/navigation"
@@ -137,10 +136,14 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={actionsRef}>
+      <div className="flex flex-col gap-y-8" ref={actionsRef}>
+        <div>
+          <ProductPrice product={product} variant={selectedVariant} />
+        </div>
+
         <div>
           {(product.variants?.length ?? 0) > 1 && (
-            <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col gap-y-6">
               {(product.options || []).map((option) => {
                 return (
                   <div key={option.id}>
@@ -155,12 +158,9 @@ export default function ProductActions({
                   </div>
                 )
               })}
-              <Divider />
             </div>
           )}
         </div>
-
-        <ProductPrice product={product} variant={selectedVariant} />
 
         <Button
           onClick={handleAddToCart}
@@ -172,7 +172,7 @@ export default function ProductActions({
             !isValidVariant
           }
           variant="primary"
-          className="w-full h-12 text-base"
+          className="w-full h-14 text-base uppercase tracking-widest font-bold"
           isLoading={isAdding}
           data-testid="add-product-button"
         >

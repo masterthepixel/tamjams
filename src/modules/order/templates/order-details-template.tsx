@@ -30,7 +30,7 @@ const OrderDetailsTemplate: React.FC<OrderDetailsTemplateProps> = ({
   order,
 }) => {
   return (
-    <div className="flex flex-col gap-y-8 py-8 lg:py-12 content-container">
+    <div className="flex flex-col gap-y-8 py-8 lg:py-12 content-container max-w-7xl mx-auto">
       <div className="flex justify-between items-center pb-6 border-b border-olive-200 dark:border-olive-800">
         <h1 className="text-4xl font-display text-olive-950 dark:text-white uppercase tracking-wider">
           Order Details

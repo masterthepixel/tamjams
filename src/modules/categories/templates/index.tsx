@@ -38,7 +38,7 @@ export default function CategoryTemplate({
 
   return (
     <div
-      className="flex flex-col small:flex-row small:items-start py-6 content-container"
+      className="flex flex-col small:flex-row small:items-start py-6 content-container max-w-7xl mx-auto"
       data-testid="category-container"
     >
       <RefinementList sortBy={sort} data-testid="sort-by-container" />

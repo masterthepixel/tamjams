@@ -13,7 +13,7 @@ const CartTemplate = ({
 }) => {
   return (
     <div className="py-12 bg-olive-100 dark:bg-olive-950 min-h-screen">
-      <div className="content-container" data-testid="cart-container">
+      <div className="content-container max-w-7xl mx-auto" data-testid="cart-container">
         {cart?.items?.length ? (
           <div className="grid grid-cols-1 small:grid-cols-[1fr_360px] gap-x-20 xl:gap-x-40">
             <div className="flex flex-col bg-white dark:bg-olive-900 border border-olive-200 dark:border-olive-800 rounded-3xl p-6 gap-y-6">
