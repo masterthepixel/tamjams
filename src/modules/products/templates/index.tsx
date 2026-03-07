@@ -35,9 +35,14 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
     <div className="bg-white dark:bg-olive-950 min-h-screen">
       <div className="content-container max-w-7xl mx-auto px-4 py-12 sm:px-6 lg:px-8">
         <div className="lg:grid lg:grid-cols-2 lg:items-start lg:gap-x-12 xl:gap-x-16">
-          {/* Left Column: Product Info & Actions */}
-          <div className="flex flex-col gap-y-10 lg:max-w-xl">
-            <nav aria-label="Breadcrumb" className="mb-2">
+          {/* Left Column: Image Gallery — first in DOM so it renders above text on mobile */}
+          <div className="xl:sticky xl:top-24">
+            <ImageGallery images={media} />
+          </div>
+
+          {/* Right Column: Product Info & Actions */}
+          <div className="flex flex-col gap-y-8 mt-10 lg:mt-0">
+            <nav aria-label="Breadcrumb">
               <ol role="list" className="flex items-center space-x-2">
                 {product.collection && (
                   <li>
@@ -67,7 +72,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
             <ProductInfo product={product} />
 
-            <div className="flex flex-col gap-y-10">
+            <div className="flex flex-col gap-y-8">
               <ProductOnboardingCta />
               <Suspense
                 fallback={
@@ -81,15 +86,10 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
                 <ProductActionsWrapper id={product.id} region={region} />
               </Suspense>
 
-              <div className="mt-8 border-t border-olive-200 dark:border-olive-800 pt-8 w-full">
+              <div className="border-t border-olive-200 dark:border-olive-800 pt-8 w-full">
                 <ProductTabs product={product} />
               </div>
             </div>
-          </div>
-
-          {/* Right Column: Image Gallery */}
-          <div className="mt-12 lg:mt-0 xl:sticky xl:top-24">
-            <ImageGallery images={media} />
           </div>
         </div>
       </div>

@@ -1,6 +1,7 @@
 import { HttpTypes } from "@medusajs/types"
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import { clsx } from "clsx"
+import ProductPrice from "@modules/products/components/product-price"
 
 type ProductInfoProps = {
   product: HttpTypes.StoreProduct
@@ -47,6 +48,9 @@ const ProductInfo = ({ product }: ProductInfoProps) => {
             <span className="text-sm font-medium text-olive-600 dark:text-olive-400">
               In stock
             </span>
+          </div>
+          <div className="pt-4">
+            <ProductPrice product={product} />
           </div>
         </div>
 
