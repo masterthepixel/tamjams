@@ -45,6 +45,7 @@ interface ProductData {
     protein: string
   }
   storage?: string
+  videoUrls?: string[]
 }
 
 interface SeedData {
@@ -130,6 +131,7 @@ export default async function seedJamsProducts({ container }: ExecArgs) {
       nutrition: product.nutrition ? JSON.stringify(product.nutrition) : undefined,
       storage: product.storage,
       longDescription: product.longDescription,
+      videoUrls: product.videoUrls ? JSON.stringify(product.videoUrls) : undefined,
     },
     options: [
       {

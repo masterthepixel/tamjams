@@ -40,6 +40,7 @@ interface ProductData {
     protein: string
   }
   storage?: string
+  videoUrls?: string[]
 }
 
 interface SeedData {
@@ -82,6 +83,7 @@ export default async function updateProductMetadata({ container }: ExecArgs) {
             nutrition: productData.nutrition ? JSON.stringify(productData.nutrition) : undefined,
             storage: productData.storage,
             longDescription: productData.longDescription,
+            videoUrls: productData.videoUrls ? JSON.stringify(productData.videoUrls) : undefined,
           },
         }
       )

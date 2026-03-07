@@ -12,19 +12,20 @@ import { HttpTypes } from "@medusajs/types"
 
 import LocalizedClientLink from "@modules/common/components/localized-client-link"
 import ProductActionsWrapper from "./product-actions-wrapper"
+import { MediaItem } from "@lib/util/combine-product-media"
 
 type ProductTemplateProps = {
   product: HttpTypes.StoreProduct
   region: HttpTypes.StoreRegion
   countryCode: string
-  images: HttpTypes.StoreProductImage[]
+  media: MediaItem[]
 }
 
 const ProductTemplate: React.FC<ProductTemplateProps> = ({
   product,
   region,
   countryCode,
-  images,
+  media,
 }) => {
   if (!product || !product.id) {
     return notFound()
@@ -88,7 +89,7 @@ const ProductTemplate: React.FC<ProductTemplateProps> = ({
 
           {/* Right Column: Image Gallery */}
           <div className="mt-12 lg:mt-0 xl:sticky xl:top-24">
-            <ImageGallery images={images} />
+            <ImageGallery images={media} />
           </div>
         </div>
       </div>
