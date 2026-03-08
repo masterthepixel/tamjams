@@ -18,36 +18,45 @@ type Props = {
 export const PRODUCT_LIMIT = 12
 
 export async function generateStaticParams() {
-  const { collections } = await listCollections({
-    fields: "*products",
-  })
+  try {
+    const { collections } = await listCollections({
+      fields: "*products",
+    })
 
-  if (!collections) {
-    return []
-  }
+    if (!collections) {
+      return []
+    }
 
-  const countryCodes = await listRegions().then(
-    (regions: StoreRegion[]) =>
-      regions
-        ?.map((r) => r.countries?.map((c) => c.iso_2))
-        .flat()
-        .filter(Boolean) as string[]
-  )
-
-  const collectionHandles = collections.map(
-    (collection: StoreCollection) => collection.handle
-  )
-
-  const staticParams = countryCodes
-    ?.map((countryCode: string) =>
-      collectionHandles.map((handle: string | undefined) => ({
-        countryCode,
-        handle,
-      }))
+    const countryCodes = await listRegions().then(
+      (regions: StoreRegion[]) =>
+        regions
+          ?.map((r) => r.countries?.map((c) => c.iso_2))
+          .flat()
+          .filter(Boolean) as string[]
     )
-    .flat()
 
-  return staticParams
+    const collectionHandles = collections.map(
+      (collection: StoreCollection) => collection.handle
+    )
+
+    const staticParams = countryCodes
+      ?.map((countryCode: string) =>
+        collectionHandles.map((handle: string | undefined) => ({
+          countryCode,
+          handle,
+        }))
+      )
+      .flat()
+
+    return staticParams
+  } catch (error) {
+    // If backend is unavailable, return empty array to enable dynamic rendering
+    if (process.env.NODE_ENV === "production") {
+      console.warn("generateStaticParams: Backend unavailable, using dynamic rendering")
+      return []
+    }
+    throw error
+  }
 }
 
 export async function generateMetadata(props: Props): Promise<Metadata> {

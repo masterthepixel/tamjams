@@ -1,6 +1,7 @@
 import { HttpTypes } from "@medusajs/types"
 import { clx } from "@medusajs/ui"
 import React from "react"
+import { Radio, RadioGroup } from "@headlessui/react"
 
 type OptionSelectProps = {
   option: HttpTypes.StoreProductOption
@@ -23,32 +24,40 @@ const OptionSelect: React.FC<OptionSelectProps> = ({
 
   return (
     <div className="flex flex-col gap-y-3">
-      <span className="text-sm">Select {title}</span>
-      <div
-        className="flex flex-wrap justify-between gap-2"
+      <span className="text-sm font-semibold text-olive-950 dark:text-white">
+        {title}
+      </span>
+      <RadioGroup
+        value={current}
+        onChange={(v) => updateOption(option.id, v as string)}
+        disabled={disabled}
+        className="grid grid-cols-3 gap-3 sm:grid-cols-6"
         data-testid={dataTestId}
       >
         {filteredOptions.map((v) => {
           return (
-            <button
-              onClick={() => updateOption(option.id, v)}
+            <Radio
               key={v}
-              className={clx(
-                "border-ui-border-base bg-ui-bg-subtle border text-small-regular h-10 rounded-rounded p-2 flex-1 ",
-                {
-                  "border-ui-border-interactive": v === current,
-                  "hover:shadow-elevation-card-rest transition-shadow ease-in-out duration-150":
-                    v !== current,
-                }
-              )}
-              disabled={disabled}
+              value={v}
+              className={({ checked }) =>
+                clx(
+                  "flex items-center justify-center rounded-lg border py-3 px-3 text-sm font-medium uppercase sm:flex-1 cursor-pointer focus:outline-none transition-all duration-200",
+                  {
+                    "border-olive-950 bg-olive-950 text-white dark:border-white dark:bg-white dark:text-olive-950 shadow-sm":
+                      checked,
+                    "border-olive-200 bg-white text-olive-950 hover:bg-olive-50 dark:border-olive-800 dark:bg-olive-900 dark:text-white dark:hover:bg-olive-800":
+                      !checked,
+                    "opacity-50 cursor-not-allowed": disabled,
+                  }
+                )
+              }
               data-testid="option-button"
             >
-              {v}
-            </button>
+              <span>{v}</span>
+            </Radio>
           )
         })}
-      </div>
+      </RadioGroup>
     </div>
   )
 }

@@ -1,31 +1,33 @@
-import { ArrowUpRightMini } from "@medusajs/icons"
-import { Text } from "@medusajs/ui"
+import { ArrowNarrowRightIcon } from "@components/oatmeal/icons/arrow-narrow-right-icon"
 import LocalizedClientLink from "../localized-client-link"
+import { clsx } from "clsx"
 
 type InteractiveLinkProps = {
   href: string
   children?: React.ReactNode
   onClick?: () => void
+  className?: string
 }
 
 const InteractiveLink = ({
   href,
   children,
   onClick,
+  className,
   ...props
 }: InteractiveLinkProps) => {
   return (
     <LocalizedClientLink
-      className="flex gap-x-1 items-center group"
+      className={clsx(
+        "flex gap-x-2 items-center group text-olive-950 dark:text-white font-medium text-sm transition-all duration-200 hover:gap-x-3",
+        className
+      )}
       href={href}
       onClick={onClick}
       {...props}
     >
-      <Text className="text-ui-fg-interactive">{children}</Text>
-      <ArrowUpRightMini
-        className="group-hover:rotate-45 ease-in-out duration-150"
-        color="var(--fg-interactive)"
-      />
+      <span>{children}</span>
+      <ArrowNarrowRightIcon className="size-4" />
     </LocalizedClientLink>
   )
 }

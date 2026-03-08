@@ -4,9 +4,9 @@ import { addToCart } from "@lib/data/cart"
 import { useIntersection } from "@lib/hooks/use-in-view"
 import { HttpTypes } from "@medusajs/types"
 import { Button } from "@medusajs/ui"
-import Divider from "@modules/common/components/divider"
 import OptionSelect from "@modules/products/components/product-actions/option-select"
 import { isEqual } from "lodash"
+import { clsx } from "clsx"
 import { useParams, usePathname, useSearchParams } from "next/navigation"
 import { useEffect, useMemo, useRef, useState } from "react"
 import ProductPrice from "../product-price"
@@ -137,10 +137,37 @@ export default function ProductActions({
 
   return (
     <>
-      <div className="flex flex-col gap-y-2" ref={actionsRef}>
+      <div className="flex flex-col gap-y-8" ref={actionsRef}>
+        {/* Price & Add to Cart Button: Horizontal flex row */}
+        <div className="flex flex-col lg:flex-row lg:items-end lg:gap-x-6 gap-y-4 lg:gap-y-0">
+          <div className="lg:w-32">
+            <ProductPrice product={product} variant={selectedVariant} />
+          </div>
+          <Button
+            onClick={handleAddToCart}
+            disabled={
+              !inStock ||
+              !selectedVariant ||
+              !!disabled ||
+              isAdding ||
+              !isValidVariant
+            }
+            variant="primary"
+            className="w-full h-12 text-base uppercase tracking-widest font-bold flex-1"
+            isLoading={isAdding}
+            data-testid="add-product-button"
+          >
+            {!selectedVariant && !options
+              ? "Select variant"
+              : !inStock || !isValidVariant
+                ? "Out of stock"
+                : "Add to cart"}
+          </Button>
+        </div>
+
         <div>
           {(product.variants?.length ?? 0) > 1 && (
-            <div className="flex flex-col gap-y-4">
+            <div className="flex flex-col gap-y-6">
               {(product.options || []).map((option) => {
                 return (
                   <div key={option.id}>
@@ -155,45 +182,22 @@ export default function ProductActions({
                   </div>
                 )
               })}
-              <Divider />
             </div>
           )}
         </div>
-
-        <ProductPrice product={product} variant={selectedVariant} />
-
-        <Button
-          onClick={handleAddToCart}
-          disabled={
-            !inStock ||
-            !selectedVariant ||
-            !!disabled ||
-            isAdding ||
-            !isValidVariant
-          }
-          variant="primary"
-          className="w-full h-10"
-          isLoading={isAdding}
-          data-testid="add-product-button"
-        >
-          {!selectedVariant && !options
-            ? "Select variant"
-            : !inStock || !isValidVariant
-            ? "Out of stock"
-            : "Add to cart"}
-        </Button>
-        <MobileActions
-          product={product}
-          variant={selectedVariant}
-          options={options}
-          updateOptions={setOptionValue}
-          inStock={inStock}
-          handleAddToCart={handleAddToCart}
-          isAdding={isAdding}
-          show={!inView}
-          optionsDisabled={!!disabled || isAdding}
-        />
       </div>
+
+      <MobileActions
+        product={product}
+        variant={selectedVariant}
+        options={options}
+        updateOptions={setOptionValue}
+        inStock={inStock}
+        handleAddToCart={handleAddToCart}
+        isAdding={isAdding}
+        show={!inView}
+        optionsDisabled={!!disabled || isAdding}
+      />
     </>
   )
 }

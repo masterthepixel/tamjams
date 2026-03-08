@@ -68,6 +68,10 @@
         "protein": "0g"
       },
       "storage": "Refrigerate after opening",
+      "videoUrls": [
+        "/static/strawberry-demo.mp4",
+        "/static/strawberry-usage.webm"
+      ],
       "sku": "TAMS-STRAWBERRY-12OZ"
     },
     {

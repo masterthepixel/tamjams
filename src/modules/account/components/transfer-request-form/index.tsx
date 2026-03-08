@@ -2,10 +2,9 @@
 
 import { useActionState } from "react"
 import { createTransferRequest } from "@lib/data/orders"
-import { Text, Heading, Input, Button, IconButton, Toaster } from "@medusajs/ui"
 import { SubmitButton } from "@modules/checkout/components/submit-button"
-import { CheckCircleMiniSolid, XCircleSolid } from "@medusajs/icons"
 import { useEffect, useState } from "react"
+import Input from "@modules/common/components/input"
 
 export default function TransferRequestForm() {
   const [showSuccess, setShowSuccess] = useState(false)
@@ -23,57 +22,66 @@ export default function TransferRequestForm() {
   }, [state.success, state.order])
 
   return (
-    <div className="flex flex-col gap-y-4 w-full">
-      <div className="grid sm:grid-cols-2 items-center gap-x-8 gap-y-4 w-full">
-        <div className="flex flex-col gap-y-1">
-          <Heading level="h3" className="text-lg text-neutral-950">
-            Order transfers
-          </Heading>
-          <Text className="text-base-regular text-neutral-500">
-            Can&apos;t find the order you are looking for?
-            <br /> Connect an order to your account.
-          </Text>
+    <div className="flex flex-col gap-y-6 w-full">
+      <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 w-full">
+        <div className="flex flex-col gap-y-1 max-w-sm">
+          <h3 className="text-xl font-display text-olive-950 dark:text-white uppercase tracking-wider">
+            Order Transfers
+          </h3>
+          <p className="text-sm text-olive-600 dark:text-olive-400">
+            Can&apos;t find an order? Connect it to your account here.
+          </p>
         </div>
         <form
           action={formAction}
-          className="flex flex-col gap-y-1 sm:items-end"
+          className="flex flex-col gap-y-4 w-full md:max-w-xs"
         >
-          <div className="flex flex-col gap-y-2 w-full">
-            <Input className="w-full" name="order_id" placeholder="Order ID" />
+          <div className="flex flex-col gap-y-3">
+            <Input
+              name="order_id"
+              label="Order ID"
+              required
+            />
             <SubmitButton
-              variant="secondary"
-              className="w-fit whitespace-nowrap self-end"
+              className="w-full h-11 text-xs"
             >
-              Request transfer
+              Request Transfer
             </SubmitButton>
           </div>
         </form>
       </div>
+
       {!state.success && state.error && (
-        <Text className="text-base-regular text-rose-500 text-right">
+        <div className="bg-red-50 dark:bg-red-950 border border-red-200 dark:border-red-900/30 p-3 rounded-xl text-red-700 dark:text-red-400 text-xs font-semibold flex items-center justify-end gap-x-2">
           {state.error}
-        </Text>
+        </div>
       )}
+
       {showSuccess && (
-        <div className="flex justify-between p-4 bg-neutral-50 shadow-borders-base w-full self-stretch items-center">
-          <div className="flex gap-x-2 items-center">
-            <CheckCircleMiniSolid className="w-4 h-4 text-emerald-500" />
+        <div className="bg-olive-50 dark:bg-olive-900 border border-olive-200 dark:border-olive-800 p-5 rounded-2xl w-full flex items-center justify-between gap-4 animate-in fade-in slide-in-from-top-2 duration-300">
+          <div className="flex gap-x-3 items-start">
+            <div className="bg-white dark:bg-olive-800 p-2 rounded-full border border-olive-100 dark:border-olive-700 shadow-sm mt-0.5">
+              <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-4 text-green-600 dark:text-green-400">
+                <path fillRule="evenodd" d="M10 18a8 8 0 1 0 0-16 8 8 0 0 0 0 16Zm3.857-9.809a.75.75 0 0 0-1.214-.882l-3.483 4.79-1.88-1.88a.75.75 0 1 0-1.06 1.061l2.5 2.5a.75.75 0 0 0 1.137-.089l4-5.5Z" clipRule="evenodd" />
+              </svg>
+            </div>
             <div className="flex flex-col gap-y-1">
-              <Text className="text-medim-pl text-neutral-950">
-                Transfer for order {state.order?.id} requested
-              </Text>
-              <Text className="text-base-regular text-neutral-600">
-                Transfer request email sent to {state.order?.email}
-              </Text>
+              <span className="text-sm font-semibold text-olive-950 dark:text-white">
+                Transfer for order {state.order?.display_id || state.order?.id} requested
+              </span>
+              <p className="text-xs text-olive-600 dark:text-olive-400">
+                Check your email at {state.order?.email} to confirm the transfer.
+              </p>
             </div>
           </div>
-          <IconButton
-            variant="transparent"
-            className="h-fit"
+          <button
             onClick={() => setShowSuccess(false)}
+            className="text-olive-400 hover:text-olive-950 dark:text-olive-500 dark:hover:text-white transition-colors"
           >
-            <XCircleSolid className="w-4 h-4 text-neutral-500" />
-          </IconButton>
+            <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20" fill="currentColor" className="size-5">
+              <path d="M6.28 5.22a.75.75 0 0 0-1.06 1.06L8.94 10l-3.72 3.72a.75.75 0 1 0 1.06 1.06L10 11.06l3.72 3.72a.75.75 0 1 0 1.06-1.06L11.06 10l3.72-3.72a.75.75 0 0 0-1.06-1.06L10 8.94 6.28 5.22Z" />
+            </svg>
+          </button>
         </div>
       )}
     </div>

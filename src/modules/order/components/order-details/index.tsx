@@ -1,5 +1,4 @@
 import { HttpTypes } from "@medusajs/types"
-import { Text } from "@medusajs/ui"
 
 type OrderDetailsProps = {
   order: HttpTypes.StoreOrder
@@ -14,48 +13,48 @@ const OrderDetails = ({ order, showStatus }: OrderDetailsProps) => {
   }
 
   return (
-    <div>
-      <Text>
+    <div className="flex flex-col gap-y-4">
+      <p className="text-base text-olive-600 dark:text-olive-400">
         We have sent the order confirmation details to{" "}
         <span
-          className="text-ui-fg-medium-plus font-semibold"
+          className="font-semibold text-olive-950 dark:text-white"
           data-testid="order-email"
         >
           {order.email}
         </span>
         .
-      </Text>
-      <Text className="mt-2">
-        Order date:{" "}
-        <span data-testid="order-date">
-          {new Date(order.created_at).toDateString()}
-        </span>
-      </Text>
-      <Text className="mt-2 text-ui-fg-interactive">
-        Order number: <span data-testid="order-id">{order.display_id}</span>
-      </Text>
-
-      <div className="flex items-center text-compact-small gap-x-4 mt-4">
-        {showStatus && (
-          <>
-            <Text>
-              Order status:{" "}
-              <span className="text-ui-fg-subtle " data-testid="order-status">
-                {formatStatus(order.fulfillment_status)}
-              </span>
-            </Text>
-            <Text>
-              Payment status:{" "}
-              <span
-                className="text-ui-fg-subtle "
-                sata-testid="order-payment-status"
-              >
-                {formatStatus(order.payment_status)}
-              </span>
-            </Text>
-          </>
-        )}
+      </p>
+      <div className="flex flex-col gap-y-1 text-sm text-olive-600 dark:text-olive-400">
+        <p>
+          Order date:{" "}
+          <span className="font-medium text-olive-950 dark:text-white" data-testid="order-date">
+            {new Date(order.created_at).toDateString()}
+          </span>
+        </p>
+        <p className="text-olive-950 dark:text-white font-medium">
+          Order number: <span data-testid="order-id">{order.display_id}</span>
+        </p>
       </div>
+
+      {showStatus && (
+        <div className="flex flex-wrap items-center gap-x-8 gap-y-2 mt-4 pt-4 border-t border-olive-200 dark:border-olive-800 text-sm">
+          <p className="text-olive-600 dark:text-olive-400">
+            Order status:{" "}
+            <span className="font-semibold text-olive-950 dark:text-white uppercase tracking-tighter" data-testid="order-status">
+              {formatStatus(order.fulfillment_status)}
+            </span>
+          </p>
+          <p className="text-olive-600 dark:text-olive-400">
+            Payment status:{" "}
+            <span
+              className="font-semibold text-olive-950 dark:text-white uppercase tracking-tighter"
+              data-testid="order-payment-status"
+            >
+              {formatStatus(order.payment_status)}
+            </span>
+          </p>
+        </div>
+      )}
     </div>
   )
 }

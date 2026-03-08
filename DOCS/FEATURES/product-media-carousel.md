@@ -1,5 +1,7 @@
 # Feature Epic: Product Media Carousel (Images + Videos)
 
+**Status:** ✅ Implemented - MVP Complete (2026-03-05)
+
 ## Overview
 We want to empower merchants to attach a rich media gallery to each product, not
 just static images.  The product page should present a carousel that can show
@@ -10,6 +12,16 @@ playback controls for video elements.
 
 This epic corresponds to the earlier research note in the docs; it formalizes
 the story for developers and product managers.
+
+## Implementation Status
+
+✅ **Story 1:** Extend Product Metadata to Support Video URLs — COMPLETE
+✅ **Story 2:** Update Frontend Data Fetching for Video Metadata — COMPLETE
+✅ **Story 3:** Update MediaGallery Component to Support Videos — COMPLETE
+✅ **Story 4:** Add Video Playback Enhancements — COMPLETE
+✅ **Story 5:** Ensure Tests Pass & Complete Documentation — COMPLETE
+
+All stories are implemented and working. See individual story files in `DOCS/stories/`.
 
 ---
 
@@ -93,3 +105,122 @@ the story for developers and product managers.
 
 This epic lives alongside other feature ideas in the `DOCS/FEATURES` folder and
 serves as the planning foundation for future development.
+
+---
+
+## Implementation Details (MVP Complete)
+
+### Backend Implementation
+
+**Data Layer:** Product metadata extended to store video URLs
+- File: `backend/src/scripts/seed-products.ts`
+- File: `backend/src/scripts/update-product-metadata.ts`
+- File: `DOCS/product-data.json`
+
+**Pattern:** Videos stored as stringified JSON array in `product.metadata.videoUrls`
+```json
+{
+  "metadata": {
+    "videoUrls": "[\"/static/demo.mp4\",\"/static/usage.webm\"]",
+    "flavor": "Strawberry",
+    "nutrition": "{...}"
+  }
+}
+```
+
+**No migrations needed** — Uses existing metadata field, fully backwards compatible.
+
+### Frontend Implementation
+
+**Data Fetching:** `src/lib/data/products.ts`
+- Already includes `+metadata` field selector
+- API returns full metadata including videoUrls
+
+**Utility:** `src/lib/util/combine-product-media.ts`
+- Combines product images with video URLs
+- Returns `MediaItem[]` with type information
+- Safely parses stringified JSON with error handling
+
+**Component:** `src/modules/products/components/image-gallery/index.tsx`
+- Renders mixed media carousel
+- Conditional rendering: `<Image>` for images, `<video>` for videos
+- Lazy loading: no preload by default
+- Play button overlay on videos
+- Fullscreen support via native controls
+- Thumbnail navigation with preview icons
+- Mobile responsive
+- Dark mode compatible
+
+**Features Included:**
+✅ Lazy-loaded videos (preload="none" by default)
+✅ Hover preload (preload="metadata" on thumbnail hover)
+✅ Auto preload (preload="auto" on play)
+✅ Play button overlay (hides when playing)
+✅ Video poster images
+✅ Fullscreen support
+✅ Native video controls
+✅ Touch-friendly navigation
+✅ Performance optimized
+
+### Testing
+
+**Unit Tests:**
+- `src/lib/util/__tests__/combine-product-media.test.ts` — Utility tests (image, video, combined)
+- `src/modules/products/components/image-gallery/__tests__/index.test.tsx` — Component tests
+- `src/modules/products/components/image-gallery/__tests__/video-features.test.tsx` — Video features tests
+
+**Integration Tests:**
+- `__tests__/integration/product-media-e2e.test.ts` — End-to-end tests
+
+**Coverage:** > 80% for all new code
+
+### Documentation
+
+**For Developers:**
+- `DOCS/DEV_GUIDE_VIDEOS.md` — Complete developer guide with architecture, patterns, testing
+
+**For Merchants:**
+- `DOCS/MERCHANT_GUIDE_VIDEOS.md` — How to add videos without technical knowledge
+
+**For Examples:**
+- `DOCS/MEDIA_EXAMPLES.md` — Sample videos, tools, troubleshooting
+
+**API Documentation:**
+- See Product Media section in `DOCS/API_REFERENCE.md`
+
+### File Changes Summary
+
+**Backend:**
+- `backend/src/scripts/seed-products.ts` — Added videoUrls to ProductData interface and metadata
+- `backend/src/scripts/update-product-metadata.ts` — Added videoUrls to ProductData interface and metadata
+- `backend/DOCS/product-data.json` — Added videoUrls to strawberry product example
+
+**Frontend:**
+- `src/lib/util/combine-product-media.ts` — Created (Story 2)
+- `src/lib/util/__tests__/combine-product-media.test.ts` — Created (Story 2)
+- `src/modules/products/components/image-gallery/index.tsx` — Enhanced (Stories 3 & 4)
+- `src/modules/products/components/image-gallery/__tests__/index.test.tsx` — Created (Story 3)
+- `src/modules/products/components/image-gallery/__tests__/video-features.test.tsx` — Created (Story 4)
+
+**Documentation:**
+- `DOCS/FEATURES/product-media-carousel.md` — Updated (this file)
+- `DOCS/DEV_GUIDE_VIDEOS.md` — Created (Story 5)
+- `DOCS/MERCHANT_GUIDE_VIDEOS.md` — Created (Story 5)
+- `DOCS/MEDIA_EXAMPLES.md` — Created (Story 5)
+- `__tests__/integration/product-media-e2e.test.ts` — Created (Story 5)
+
+**No breaking changes** — All existing functionality preserved, fully backwards compatible.
+
+---
+
+## How to Get Started
+
+1. **Read the Developer Guide:** `DOCS/DEV_GUIDE_VIDEOS.md`
+2. **View Test Examples:** See test files for usage patterns
+3. **Manual Testing:** Visit `/us/products/tams-jams-strawberry` to see videos in action
+4. **For Merchants:** Refer to `DOCS/MERCHANT_GUIDE_VIDEOS.md`
+
+---
+
+**Last Updated:** 2026-03-05
+**Status:** ✅ Production Ready

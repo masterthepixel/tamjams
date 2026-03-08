@@ -3,6 +3,7 @@ import { notFound } from "next/navigation"
 import { listProducts } from "@lib/data/products"
 import { getRegion, listRegions } from "@lib/data/regions"
 import ProductTemplate from "@modules/products/templates"
+import { getCombinedMedia } from "@lib/util/combine-product-media"
 import { HttpTypes } from "@medusajs/types"
 
 type Props = {
@@ -55,14 +56,14 @@ export async function generateStaticParams() {
 function getImagesForVariant(
   product: HttpTypes.StoreProduct,
   selectedVariantId?: string
-) {
+): HttpTypes.StoreProductImage[] {
   if (!selectedVariantId || !product.variants) {
-    return product.images
+    return product.images || []
   }
 
   const variant = product.variants!.find((v) => v.id === selectedVariantId)
-  if (!variant || !variant.images.length) {
-    return product.images
+  if (!variant || !variant.images?.length) {
+    return product.images || []
   }
 
   const imageIdsMap = new Map(variant.images.map((i) => [i.id, true]))
@@ -114,18 +115,24 @@ export default async function ProductPage(props: Props) {
     queryParams: { handle: params.handle },
   }).then(({ response }) => response.products[0])
 
-  const images = getImagesForVariant(pricedProduct, selectedVariantId)
-
   if (!pricedProduct) {
     notFound()
   }
+
+  // Filter images by variant if selected, then combine with videos
+  const variantImages = getImagesForVariant(pricedProduct, selectedVariantId)
+  const productForGallery = {
+    ...pricedProduct,
+    images: variantImages,
+  }
+  const media = getCombinedMedia(productForGallery)
 
   return (
     <ProductTemplate
       product={pricedProduct}
       region={region}
       countryCode={params.countryCode}
-      images={images}
+      media={media}
     />
   )
 }
