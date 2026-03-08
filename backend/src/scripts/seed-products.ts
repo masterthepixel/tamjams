@@ -76,8 +76,28 @@ export default async function seedJamsProducts({ container }: ExecArgs) {
   logger.info(`Using sales channel: ${defaultSalesChannel.name}`)
 
   // Get or create Products category
-  let categories = await productModuleService.listProductCategories()
-  let productsCategory = categories.find((c: any) => c.name === "Products" || c.handle === "products")
+  // fetch existing categories and lookup the Products category by name/handle
+  // first attempt: direct graph query by handle (bypasses pagination issues)
+  const query = container.resolve(ContainerRegistrationKeys.QUERY)
+  let productsCategory: any = null
+  try {
+    const { data: foundCats } = await query.graph({
+      entity: "product_category",
+      fields: ["id", "name", "handle"],
+      filters: { handle: "products" },
+    })
+    if (foundCats && foundCats.length > 0) {
+      productsCategory = foundCats[0]
+    }
+  } catch (err) {
+    // ignore, fall back to service list
+  }
+
+  // fallback: list via module service
+  if (!productsCategory) {
+    const categories = await productModuleService.listProductCategories()
+    productsCategory = categories.find((c: any) => c.name === "Products" || c.handle === "products")
+  }
 
   if (!productsCategory) {
     logger.info("Creating Products category...")
@@ -91,9 +111,13 @@ export default async function seedJamsProducts({ container }: ExecArgs) {
         : newCategories
     } catch (error) {
       // If already exists, fetch again
-      logger.info("Category already exists, fetching...")
-      categories = await productModuleService.listProductCategories()
-      productsCategory = categories.find((c: any) => c.name === "Products" || c.handle === "products")
+      logger.info("Category already exists, fetching by handle...")
+      const { data: foundCats } = await query.graph({
+        entity: "product_category",
+        fields: ["id", "name", "handle"],
+        filters: { handle: "products" },
+      })
+      productsCategory = foundCats?.[0]
       if (!productsCategory) {
         throw error
       }
@@ -106,6 +130,8 @@ export default async function seedJamsProducts({ container }: ExecArgs) {
 
   logger.info(`Using category: ${productsCategory.name}`)
 
+  logger.info(`Using category: ${productsCategory.name}`)
+
   // Note: Jam collection linking will be done via workflow after product creation
 
   // Transform data into workflow format
@@ -115,14 +141,8 @@ export default async function seedJamsProducts({ container }: ExecArgs) {
     description: product.description,
     status: ProductStatus.PUBLISHED,
     category_ids: [productsCategory.id],
-    tags: [
-      "jam",
-      "homemade",
-      "real-fruit",
-      "non-gmo",
-      "no-additives",
-      product.flavor.toLowerCase(),
-    ],
+    // no tags are provided - tags can be added later via admin or separate workflow
+    tags: [],
     metadata: {
       flavor: product.flavor,
       ingredients: product.ingredients.join(", "),
