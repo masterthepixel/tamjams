@@ -22,6 +22,8 @@
     "link:products-to-jam": "medusa exec ./src/scripts/link-products-to-jam.ts",
     "update:metadata": "medusa exec ./src/scripts/update-product-metadata.ts",
     "link:product-images": "medusa exec ./src/scripts/link-product-images.ts",
+    "fix:sales-channels": "medusa exec ./src/scripts/fix-sales-channels.ts",
+    "get:api-key": "medusa exec ./src/scripts/get-api-key.ts",
     "import:products": "node scripts/import-products.js",
     "start": "medusa start",
     "dev": "medusa develop",
