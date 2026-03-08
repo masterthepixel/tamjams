@@ -114,19 +114,15 @@ export async function POST(req: MedusaRequest, res: MedusaResponse) {
 
       console.log("Updating product metadata:", { productId, videoCount: updatedUrls.length })
 
-      await productModule.updateProducts(
-        [
-          {
-            id: productId,
-            metadata: newMetadata,
-          },
-        ],
-        {}
-      )
+      await productModule.updateProducts(productId, {
+        metadata: newMetadata,
+      })
 
       console.log("Product metadata updated successfully")
     } catch (metadataError) {
-      console.error("Error updating metadata (but file was saved):", metadataError)
+      console.error("Error updating metadata (but file was saved):")
+      console.error("Error type:", metadataError instanceof Error ? metadataError.message : String(metadataError))
+      console.error("Error details:", metadataError)
       // Don't fail the upload - file is already saved
     }
 

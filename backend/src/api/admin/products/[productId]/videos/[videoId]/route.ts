@@ -63,15 +63,9 @@ export async function DELETE(req: MedusaRequest, res: MedusaResponse) {
 
       console.log("Updating product metadata after delete:", { productId, videoCount: updatedUrls.length })
 
-      await productModule.updateProducts(
-        [
-          {
-            id: productId,
-            metadata: newMetadata,
-          },
-        ],
-        {}
-      )
+      await productModule.updateProducts(productId, {
+        metadata: newMetadata,
+      })
 
       console.log("Product metadata updated after delete")
     } catch (metadataError) {
