@@ -1,7 +1,6 @@
 {
   "$schema": "https://railway.app/railway.schema.json",
   "build": {
-    // use nixpacks (default Node) instead of dockerfile so we don’t need a Dockerfile
-    "builder": "nixpacks"
+    "builder": "dockerfile"
   }
 }
