@@ -1,0 +1,49 @@
+# Dependencies
+node_modules
+npm-debug.log
+pnpm-debug.log
+yarn-error.log
+
+# Environment files (use Railway env vars instead)
+.env
+.env.local
+.env.*.local
+.env.test
+.env.test.local
+
+# Build artifacts
+.medusa/server
+.medusa/admin
+.medusa/client
+.cache
+dist
+
+# Git
+.git
+.gitignore
+.github
+
+# Development
+.vscode
+.idea
+*.swp
+*.swo
+
+# Documentation
+README.md
+DOCS/
+docs/
+
+# Test files
+__tests__
+__test__
+*.test.ts
+*.spec.ts
+jest.config.js
+jest.setup.js
+
+# Scripts (excluded from build anyway)
+src/scripts/
+
+# Railway config (not needed in image)
+railway.json

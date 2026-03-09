@@ -2,24 +2,38 @@
 # Use Node 20 (same as local dev environment)
 FROM node:20-alpine
 
-# create app directory
 WORKDIR /app
 
-# Copy package files first for dependency install cache
+# Install pnpm globally
+RUN npm install -g pnpm@10.30.3
+
+# Copy only package files first for dependency layer caching
 COPY package.json pnpm-lock.yaml ./
 
-# Install pnpm globally and dependencies
-RUN npm install -g pnpm && \
-    pnpm install --frozen-lockfile --prod
+# Install dependencies (including dev deps for build step)
+RUN pnpm install --frozen-lockfile
 
-# Copy the rest of the backend code
+# Copy backend source code
+# Note: .dockerignore excludes node_modules, .env, build artifacts, etc.
 COPY . .
 
-# Build the backend (generates .medusa/server and compiles TS)
-RUN pnpm build
+# Build with dummy DATABASE_URL if not provided
+# (medusa build only generates TypeScript, doesn't connect to DB)
+RUN DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" \
+    STORE_CORS="*" \
+    ADMIN_CORS="*" \
+    AUTH_CORS="*" \
+    JWT_SECRET="build-secret" \
+    COOKIE_SECRET="build-secret" \
+    NODE_ENV="production" \
+    pnpm build
+
+# Remove dev dependencies to reduce image size
+# Keep only runtime dependencies
+RUN pnpm prune --prod
 
 # Expose default port
 EXPOSE 9000
 
-# Start Medusa
+# Start Medusa server with production config from Railway env vars
 CMD ["pnpm", "start"]
