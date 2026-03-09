@@ -17,15 +17,15 @@ RUN pnpm install --frozen-lockfile
 # Note: .dockerignore excludes node_modules, .env, build artifacts, etc.
 COPY . .
 
-# Build with dummy DATABASE_URL if not provided
+# Build with build-time environment variables
 # (medusa build only generates TypeScript, doesn't connect to DB)
-RUN DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" \
-    STORE_CORS="*" \
-    ADMIN_CORS="*" \
-    AUTH_CORS="*" \
-    JWT_SECRET="build-secret" \
-    COOKIE_SECRET="build-secret" \
-    NODE_ENV="production" \
+RUN export DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" && \
+    export STORE_CORS="*" && \
+    export ADMIN_CORS="*" && \
+    export AUTH_CORS="*" && \
+    export JWT_SECRET="build-secret" && \
+    export COOKIE_SECRET="build-secret" && \
+    export NODE_ENV="production" && \
     pnpm build
 
 # Remove dev dependencies to reduce image size

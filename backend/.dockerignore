@@ -11,12 +11,10 @@ yarn-error.log
 .env.test
 .env.test.local
 
-# Build artifacts
-.medusa/server
-.medusa/admin
-.medusa/client
+# Build artifacts (generated during build, not in git)
 .cache
 dist
+build/
 
 # Git
 .git
