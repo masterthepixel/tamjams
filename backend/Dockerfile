@@ -30,7 +30,7 @@ RUN export DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" && \
 
 # Remove dev dependencies to reduce image size
 # Keep only runtime dependencies
-RUN pnpm prune --prod
+RUN CI=true pnpm prune --prod
 
 # Expose default port
 EXPOSE 9000
