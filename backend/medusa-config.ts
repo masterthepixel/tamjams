@@ -13,6 +13,9 @@ module.exports = defineConfig({
       cookieSecret: process.env.COOKIE_SECRET || "supersecret",
     }
   },
+  // Disable admin UI in production (served separately if needed)
+  // Focus on API functionality for media uploads
+  admin: false,
   // force local file service so uploads land in the mounted volume
   // (Railway provides a volume at /app/backend/static via RAILWAY_VOLUME_MOUNT_PATH)
   plugins: [
