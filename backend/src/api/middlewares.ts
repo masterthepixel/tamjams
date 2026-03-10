@@ -11,6 +11,15 @@ const upload = multer({
 export default defineMiddlewares({
   routes: [
     {
+      matcher: "/health",
+      method: "GET",
+      middlewares: [
+        (req, res) => {
+          res.status(200).json({ status: "ok" })
+        },
+      ],
+    },
+    {
       matcher: "/admin/products/:productId/videos",
       method: ["POST", "DELETE", "GET"],
       middlewares: [
