@@ -1,0 +1,6 @@
+FROM node:20-alpine
+WORKDIR /app
+COPY package.json ./
+RUN npm install -g pnpm@10.30.3 && pnpm install
+EXPOSE 9000
+CMD ["echo", "test"]
