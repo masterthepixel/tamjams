@@ -18,7 +18,7 @@ RUN pnpm install --frozen-lockfile
 COPY . .
 
 # Build with build-time environment variables
-# (medusa build only generates TypeScript, doesn't connect to DB)
+# (medusa build generates .medusa/server with admin UI, needs both build and runtime deps)
 RUN export DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" && \
     export STORE_CORS="*" && \
     export ADMIN_CORS="*" && \
@@ -27,10 +27,6 @@ RUN export DATABASE_URL="postgresql://dummy:dummy@dummy:5432/dummy" && \
     export COOKIE_SECRET="build-secret" && \
     export NODE_ENV="production" && \
     pnpm build
-
-# Remove dev dependencies to reduce image size
-# Keep only runtime dependencies
-RUN CI=true pnpm prune --prod
 
 # Expose default port
 EXPOSE 9000
